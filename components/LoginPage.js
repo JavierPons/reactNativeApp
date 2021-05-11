@@ -15,10 +15,19 @@ export default class LoginPage extends Component{
                 [event.target.name]:event.target.value
             })
     }
+    handleUsername = input => {
+            this.setState({
+                username: input
+            })
+    }
+    handlePassword = input => {
+                this.setState({
+                    password: input
+                })
+        }
 
     onSubmit = event => {
         event.preventDefault();
-        console.log("adimiiro")
 
         let user = {
             username:this.state.username,
@@ -38,21 +47,23 @@ export default class LoginPage extends Component{
 
                    <Text>Username</Text>
                     <TextInput type="text"
+
                            name="username"
-                           onChange={this.onChange}
+                           onChangeText={this.handleUsername}
                            value={this.state.username}
                     />
                     <Text>Password</Text>
                        <TextInput type="password"
+                              secureTextEntry={true}
                               name="password"
-                              onChange={this.onChange}
+                              onChangeText={this.handlePassword}
                               value={this.state.password}
                      />
 
 
-                      <Button  onClick={this.onSubmit} name="register" title="Register"/>
+                      <Button  onPress={this.onSubmit} name="register" title="Register"/>
                       <View style={styles.space}/>
-                      <Button  onClick={this.onSubmit} name="login" title="Login"/>
+                      <Button  onPress={this.onSubmit} name="login" title="Login"/>
 
 
 
