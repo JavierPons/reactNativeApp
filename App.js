@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { NativeRouter, Switch, Route, Redirect} from 'react-router-native';
+import { NativeRouter, Route, Switch } from "react-router-native";
 import LoginPage from './components/LoginPage'
+import Calendar from './components/Calendar'
+
  class App extends Component{
 
         constructor(props){
@@ -13,6 +15,15 @@ import LoginPage from './components/LoginPage'
                     token:""
                 }
         }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
         saveToStorage = () => {
         		sessionStorage.setItem("state",JSON.stringify(this.state));
@@ -74,9 +85,10 @@ import LoginPage from './components/LoginPage'
 
  render(){
       return (
+
          <View style={styles.container}>
-          <LoginPage register ={this.register} login={this.login}/>
-           <StatusBar style="auto" />
+            <LoginPage register={this.register} login={this.login}/>
+            <StatusBar style="auto" />
          </View>
        );
  }
