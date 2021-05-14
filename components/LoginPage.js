@@ -42,6 +42,7 @@ export default class LoginPage extends Component{
     }
 
     render(){
+
         return (
             <View style={{width:100, margin:"auto"}}>
 

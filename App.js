@@ -27,6 +27,23 @@ import LoginPage from './components/LoginPage'
         			this.saveToStorage();
         		})
         	}
+       register = user => {
+            let request = {
+                method: "POST",
+                mode:'cors',
+                headers: {"Content-type":"application/json"},
+                body: JSON.stringify(user)
+            }
+            fetch("http://192.168.1.243:3009/register", request).then(response => {
+                if(response.ok){
+                    alert("Register Success!")
+                }else {
+                    console.log("Server responded with a status: ",response.status)
+                }
+            }).catch(error => {
+                console.log("There was an error. Error: ", error)
+            })
+       }
 
        login = user => {
             let request = {
@@ -34,9 +51,9 @@ import LoginPage from './components/LoginPage'
                 headers: {"Content-type":"application/json"},
                 body:JSON.stringify(user)
             }
-            fetch("/login", request).then(response => {
-                if(reponse.ok){
-                    reponse.json().then(data => {
+            fetch("http://192.168.1.243:3009/login", request).then(response => {
+                if(response.ok){
+                    response.json().then(data => {
                         this.setState({
                             isLogged:true,
                             token:data.token
@@ -58,7 +75,7 @@ import LoginPage from './components/LoginPage'
  render(){
       return (
          <View style={styles.container}>
-          <LoginPage login={this.login}/>
+          <LoginPage register ={this.register} login={this.login}/>
            <StatusBar style="auto" />
          </View>
        );
