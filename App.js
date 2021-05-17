@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Switch } from "react-router-native";
 import LoginPage from './components/LoginPage'
-import Calendar from './components/Calendar'
-
+import MyCalendar from './components/MyCalendar'
+ // <LoginPage register={this.register} login={this.login}/>   
  class App extends Component{
 
         constructor(props){
@@ -87,7 +87,7 @@ import Calendar from './components/Calendar'
       return (
 
          <View style={styles.container}>
-            <LoginPage register={this.register} login={this.login}/>
+           <MyCalendar/>
             <StatusBar style="auto" />
          </View>
        );

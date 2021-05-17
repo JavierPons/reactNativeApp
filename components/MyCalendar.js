@@ -1,15 +1,16 @@
 import React, { Component  } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
+import { Calendar } from 'react-native-calendars';
 class MyCalendar extends Component {
 
 
       render() {
+      let myDate = Date.now()
         return (
           <View>
             <Calendar
               // Initially visible month. Default = Date()
-              current={'2012-03-01'}
+              current={myDate}
               // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
               minDate={'2012-05-10'}
               // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
@@ -25,8 +26,13 @@ class MyCalendar extends Component {
                 console.log('month changed', month);
               }}
               // Hide month navigation arrows. Default = false
-              hideArrows={true}
+              hideArrows={false}
               // Do not show days of other months in month page. Default = false
+
+              showWeekNumbers={true}
+              markedDates={{
+                  '2021-05-22': {selected: true, marked: true, selectedColor: 'blue'}
+                }}
               hideExtraDays={true}
               // If hideArrows=false and hideExtraDays=false do not swich month when tapping on greyed out
               // day from another month that is visible in calendar page. Default = false
