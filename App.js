@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Switch } from "react-router-native";
 import LoginPage from './components/LoginPage'
 import MyCalendar from './components/MyCalendar'
- // <LoginPage register={this.register} login={this.login}/>   
+ // <LoginPage register={this.register} login={this.login}/>     <MyCalendar/>
  class App extends Component{
 
         constructor(props){
@@ -16,15 +16,6 @@ import MyCalendar from './components/MyCalendar'
                 }
         }
  
- 
- 
- 
- 
- 
- 
- 
- 
-
         saveToStorage = () => {
         		sessionStorage.setItem("state",JSON.stringify(this.state));
         	}
@@ -87,7 +78,8 @@ import MyCalendar from './components/MyCalendar'
       return (
 
          <View style={styles.container}>
-           <MyCalendar/>
+         <LoginPage register={this.register} login={this.login}/>
+           
             <StatusBar style="auto" />
          </View>
        );
