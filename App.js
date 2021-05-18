@@ -36,7 +36,7 @@ import MyCalendar from './components/MyCalendar'
                 headers: {"Content-type":"application/json"},
                 body: JSON.stringify(user)
             }
-            fetch("http://192.168.1.243:3009/register", request).then(response => {
+            fetch("https://backendandroid.herokuapp.com/register", request).then(response => {
                 if(response.ok){
                     alert("Register Success!")
                 }else {
@@ -53,7 +53,7 @@ import MyCalendar from './components/MyCalendar'
                 headers: {"Content-type":"application/json"},
                 body:JSON.stringify(user)
             }
-            fetch("http://192.168.1.243:3009/login", request).then(response => {
+            fetch("https://backendandroid.herokuapp.com/login", request).then(response => {
                 if(response.ok){
                     response.json().then(data => {
                         this.setState({
