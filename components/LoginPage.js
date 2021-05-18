@@ -26,20 +26,26 @@ export default class LoginPage extends Component{
                 })
         }
 
-    onSubmit = event => {
+    onSubmitRegister = event => {
         event.preventDefault();
 
         let user = {
             username:this.state.username,
             password:this.state.password
         }
-        if(event.target.name === 'register'){
             this.props.register(user);
-        }else {
-            this.props.login(user)
-        }
 
     }
+
+     onSubmitLogin = event => {
+            event.preventDefault();
+
+            let user = {
+                username:this.state.username,
+                password:this.state.password
+            }
+                this.props.login(user)
+        }
 
     render(){
 
@@ -62,9 +68,9 @@ export default class LoginPage extends Component{
                      />
 
 
-                      <Button  onPress={this.onSubmit} name="register" title="Register"/>
+                      <Button  onPress={this.onSubmitRegister} name="register" title="Register"/>
                       <View style={styles.space}/>
-                      <Button  onPress={this.onSubmit} name="login" title="Login"/>
+                      <Button  onPress={this.onSubmitLogin} name="login" title="Login"/>
 
 
 
