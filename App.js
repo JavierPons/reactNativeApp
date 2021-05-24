@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Switch, Redirect } from "react-router-native";
 import LoginPage from './components/LoginPage'
 import MyCalendar from './components/MyCalendar'
+import Logout from './components/Logout'
+
  // <LoginPage register={this.register} login={this.login}/>     <MyCalendar/>      <StatusBar style="auto" />
  class App extends Component{
 
@@ -66,10 +68,31 @@ import MyCalendar from './components/MyCalendar'
             })
        }
 
+    logout = () => {
+            let request = {
+                method: "POST",
+                mode: "cors",
+                headers: {"Content-type":"application/json",
+                "token": this.state.token}
+            }
+            fetch("/logout", request).then(response => {
+                    if(response.ok){
+                        this.clearState();
+                    } else {
+                        this.clearState();
+                        console.log("Server responded with a status:", response.status)
+                    }
+            }).catch(error => {
+                console.log("There was an error:", error);
+                this.clearState();
+            })
+    }
+
  render(){
       return (
           <NativeRouter>
                  <View style={styles.container}>
+                 <Logout isLogged={this.state.isLogged} logout={this.logout}/>
                  <Switch>
                    <Route exact path="/" render={()=> this.state.isLogged ?
                           (<Redirect to="/calendar"/>) :

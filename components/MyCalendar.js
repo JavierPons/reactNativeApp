@@ -31,7 +31,7 @@ class MyCalendar extends Component {
 
               showWeekNumbers={true}
               markedDates={{
-                  '2021-05-22': {selected: true, marked: true, selectedColor: 'blue'}
+                  current: {selected: true, marked: true, selectedColor: 'blue'}
                 }}
               hideExtraDays={true}
               // If hideArrows=false and hideExtraDays=false do not swich month when tapping on greyed out
