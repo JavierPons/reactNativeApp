@@ -71,10 +71,12 @@ import MyCalendar from './components/MyCalendar'
           <NativeRouter>
                  <View style={styles.container}>
                  <Switch>
-                   <Route exact path="/" render={()=>
+                   <Route exact path="/" render={()=> this.state.isLogged ?
+                          (<Redirect to="/calendar"/>) :
                          ( <LoginPage register={this.register} login={this.login}/>)}  />
-                   <Route path="/calendar" render={()=>
-                    ( <MyCalendar/>)
+                   <Route path="/calendar" render={()=> this.state.isLogged ?
+                    ( <MyCalendar/>) :
+                    (<Redirect to="/"/>)
                    }  />
 
                           <StatusBar style="auto" />
