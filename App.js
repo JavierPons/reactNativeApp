@@ -16,28 +16,12 @@ import MyCalendar from './components/MyCalendar'
                 }
         }
 
-        componentDidMount(){
-            if(sessionStorage.getItem("state")){
-                let state = JSON.parse(sessionStorage.getItem("state"));
-                this.setState(state, () =>  {
-                        if(this.state.isLogged){
-                            this.getList();
-                        }
-                })
-            }
-        }
- 
-        saveToStorage = () => {
-        		sessionStorage.setItem("state",JSON.stringify(this.state));
-        	}
 
         	clearState = () => {
         		this.setState({
         			list:[],
         			isLogged:false,
         			token:""
-        		}, () => {
-        			this.saveToStorage();
         		})
         	}
        register = user => {
@@ -70,9 +54,6 @@ import MyCalendar from './components/MyCalendar'
                         this.setState({
                             isLogged:true,
                             token:data.token
-                        }, () => {
-                            this.saveToStorage();
-
                         })
                     }).catch(error => {
                         console.log("Failed to parse JSON, Reason:", error)
