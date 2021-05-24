@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { NativeRouter, Route, Switch } from "react-router-native";
+import { NativeRouter, Route, Switch, Redirect } from "react-router-native";
 import LoginPage from './components/LoginPage'
 import MyCalendar from './components/MyCalendar'
- // <LoginPage register={this.register} login={this.login}/>     <MyCalendar/>
+ // <LoginPage register={this.register} login={this.login}/>     <MyCalendar/>      <StatusBar style="auto" />
  class App extends Component{
 
         constructor(props){
@@ -14,6 +14,17 @@ import MyCalendar from './components/MyCalendar'
                     isLogged:false,
                     token:""
                 }
+        }
+
+        componentDidMount(){
+            if(sessionStorage.getItem("state")){
+                let state = JSON.parse(sessionStorage.getItem("state"));
+                this.setState(state, () =>  {
+                        if(this.state.isLogged){
+                            this.getList();
+                        }
+                })
+            }
         }
  
         saveToStorage = () => {
@@ -76,12 +87,19 @@ import MyCalendar from './components/MyCalendar'
 
  render(){
       return (
+          <NativeRouter>
+                 <View style={styles.container}>
+                 <Switch>
+                   <Route exact path="/" render={()=>
+                         ( <LoginPage register={this.register} login={this.login}/>)}  />
+                   <Route path="/calendar" render={()=>
+                    ( <MyCalendar/>)
+                   }  />
 
-         <View style={styles.container}>
-         <LoginPage register={this.register} login={this.login}/>
-           
-            <StatusBar style="auto" />
-         </View>
+                          <StatusBar style="auto" />
+                 </Switch>
+                 </View>
+          </NativeRouter>
        );
  }
 
