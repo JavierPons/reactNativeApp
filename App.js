@@ -75,7 +75,7 @@ import Logout from './components/Logout'
                 headers: {"Content-type":"application/json",
                 "token": this.state.token}
             }
-            fetch("/logout", request).then(response => {
+            fetch("https://backendandroid.herokuapp.com/logout", request).then(response => {
                     if(response.ok){
                         this.clearState();
                     } else {
