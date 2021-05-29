@@ -1,6 +1,7 @@
 import React from 'react';
 import {  View, Button, Text } from 'react-native';
-import { Link } from "react-router-native";
+import { Link, Redirect } from "react-router-native";
+
 export default class Logout extends React.Component  {
         render(){
                 if(this.props.isLogged){

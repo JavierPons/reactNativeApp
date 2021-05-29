@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Switch, Redirect } from "react-router-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginPage from './components/LoginPage'
 import MyCalendar from './components/MyCalendar'
 import Logout from './components/Logout'
@@ -18,7 +19,28 @@ import Logout from './components/Logout'
                 }
         }
 
+        componentDidMount() {
+                if(AsyncStorage.setItem('state')){
+                    try {
+                        let state = AsyncStorage.getItem('state');
+                        this.setState(state, () => {
+                                if(this.state.isLogged){
+                                }
+                        })
+                    } catch (err) {
+                        console.log(err)
+                    }
+                }
+        }
 
+        saveToStorage = () => {
+            try{
+                  AsyncStorage.setItem("state", JSON.stringify(this.state))
+            } catch (err){
+                  console.log(err)
+            }
+
+        }
         	clearState = () => {
         		this.setState({
         			list:[],
@@ -26,6 +48,7 @@ import Logout from './components/Logout'
         			token:""
         		})
         	}
+        	
        register = user => {
             let request = {
                 method: "POST",
@@ -56,6 +79,9 @@ import Logout from './components/Logout'
                         this.setState({
                             isLogged:true,
                             token:data.token
+                        }, () => {
+                            this.saveToStorage();
+                           
                         })
                     }).catch(error => {
                         console.log("Failed to parse JSON, Reason:", error)
