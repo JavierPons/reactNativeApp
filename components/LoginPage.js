@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-
+import { LoginButton, AccessToken } from 'react-native-fbsdk-next';
 
 export default class LoginPage extends Component{
     constructor(props){
@@ -58,6 +58,7 @@ export default class LoginPage extends Component{
                            name="username"
                            onChangeText={this.handleUsername}
                            value={this.state.username}
+                           placeholder="Username"
                     />
                     <Text>Password</Text>
                        <TextInput type="password"
@@ -65,6 +66,8 @@ export default class LoginPage extends Component{
                               name="password"
                               onChangeText={this.handlePassword}
                               value={this.state.password}
+                              placeholder="Password"
+                              secureTextEntry={true}
                      />
 
 
@@ -72,7 +75,23 @@ export default class LoginPage extends Component{
                       <View style={styles.space}/>
                       <Button  onPress={this.onSubmitLogin} name="login" title="Login"/>
 
-
+                      {/* <LoginButton
+                            onLoginFinished={
+                                (error, result) => {
+                                if (error) {
+                                    console.log("login has error: " + result.error);
+                                } else if (result.isCancelled) {
+                                    console.log("login is cancelled.");
+                                } else {
+                                    AccessToken.getCurrentAccessToken().then(
+                                    (data) => {
+                                        console.log(data.accessToken.toString())
+                                    }
+                                    )
+                                }
+                                }
+                            }
+                            onLogoutFinished={() => console.log("logout.")}/> */}
 
             </View>
 

@@ -6,6 +6,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginPage from './components/LoginPage'
 import MyCalendar from './components/MyCalendar'
 import Logout from './components/Logout'
+import FbLogin from './components/FbLogin'
+
+//import com.facebook.FacebookSdk;
+import { Settings } from 'react-native-fbsdk-next';
 
  // <LoginPage register={this.register} login={this.login}/>     <MyCalendar/>      <StatusBar style="auto" />
  class App extends Component{
@@ -33,9 +37,9 @@ import Logout from './components/Logout'
                 }
         }
 
-        saveToStorage = () => {
+        saveToStorage = async () => {
             try{
-                  AsyncStorage.setItem("state", JSON.stringify(this.state))
+                  await AsyncStorage.setItem("state", JSON.stringify(this.state))
             } catch (err){
                   console.log(err)
             }
@@ -118,6 +122,8 @@ import Logout from './components/Logout'
       return (
           <NativeRouter>
                  <View style={styles.container}>
+
+                 {/* <FbLogin/> */}
                  <Logout isLogged={this.state.isLogged} logout={this.logout}/>
                  <Switch>
                    <Route exact path="/" render={()=> this.state.isLogged ?
