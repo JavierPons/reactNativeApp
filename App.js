@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Switch, Redirect } from "react-router-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LoginPage from './components/LoginPage'
-import MyCalendar from './components/MyCalendar'
-import Logout from './components/Logout'
+import LoginPage from './components/LoginPage';
+import ChooseOption from './components/ChooseOption';
+import MyCalendar from './components/MyCalendar';
+import Logout from './components/Logout';
 import FbLogin from './components/FbLogin'
 
 //import com.facebook.FacebookSdk;
@@ -24,12 +25,13 @@ import { Settings } from 'react-native-fbsdk-next';
         }
 
         callStorage = async () => {
-            
+
             if(await AsyncStorage.getItem('state')){
                 try {
                     let state = await AsyncStorage.getItem('state');
-                    this.setState(state, () => {
+                    this.setState(JSON.parse(state), () => {
                             if(this.state.isLogged){
+                                
                             }
                     })
                 } catch (err) {
@@ -81,6 +83,7 @@ import { Settings } from 'react-native-fbsdk-next';
        login = user => {
             let request = {
                 method:"POST",
+                mode:'cors',
                 headers: {"Content-type":"application/json"},
                 body:JSON.stringify(user)
             }
