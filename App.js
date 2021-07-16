@@ -23,19 +23,26 @@ import { Settings } from 'react-native-fbsdk-next';
                 }
         }
 
-        componentDidMount() {
-                if(AsyncStorage.setItem('state')){
-                    try {
-                        let state = AsyncStorage.getItem('state');
-                        this.setState(state, () => {
-                                if(this.state.isLogged){
-                                }
-                        })
-                    } catch (err) {
-                        console.log(err)
-                    }
+        callStorage = async () => {
+            
+            if(await AsyncStorage.getItem('state')){
+                try {
+                    let state = await AsyncStorage.getItem('state');
+                    this.setState(state, () => {
+                            if(this.state.isLogged){
+                            }
+                    })
+                } catch (err) {
+                    console.log(err)
                 }
+            }
         }
+
+        componentDidMount() {
+            this.callStorage()
+        }
+
+
 
         saveToStorage = async () => {
             try{
